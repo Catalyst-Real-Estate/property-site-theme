@@ -1,0 +1,6 @@
+{
+  "$comment": "Registry of Catalyst property repos that subscribe to theme updates. Add an entry when you create a new property repo via 'Use this template'. notify-property-sites.yml reads this file to fan out repository_dispatch events on push to main.",
+  "properties": [
+    "lynn-park-website"
+  ]
+}
