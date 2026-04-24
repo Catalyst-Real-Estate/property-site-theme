@@ -1,0 +1,41 @@
+name: Notify property sites of theme update
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+jobs:
+  dispatch:
+    # Only run in the theme repo itself.
+    if: github.repository == 'Catalyst-Real-Estate/property-site-theme'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout theme repo
+        uses: actions/checkout@v4
+
+      - name: Read property-sites.json
+        id: read
+        run: |
+          sites=$(jq -r '.properties[]' property-sites.json | tr '\n' ' ')
+          echo "sites=$sites" >> $GITHUB_OUTPUT
+
+      - name: Fire repository_dispatch to each property
+        env:
+          GH_TOKEN: ${{ secrets.THEME_SYNC_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "WARNING: THEME_SYNC_TOKEN secret is not set. Skipping dispatch."
+            echo "Child repos will still pick up theme changes via the daily cron in sync-from-theme.yml."
+            exit 0
+          fi
+          for site in ${{ steps.read.outputs.sites }}; do
+            echo "Dispatching theme-updated to Catalyst-Real-Estate/$site"
+            curl -sS -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/Catalyst-Real-Estate/$site/dispatches" \
+              -d '{"event_type":"theme-updated"}' || echo "WARNING: dispatch to $site failed"
+          done
