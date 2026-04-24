@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+
+# Node (for any local tooling)
+node_modules/
+npm-debug.log
+
+# Build output (none expected, but guard against it)
+dist/
+build/
+
+# Env
+.env
+.env.local
