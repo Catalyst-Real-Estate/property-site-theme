@@ -41,7 +41,6 @@ Required scopes:
 - `.github/workflows/sync-from-theme.yml` — theme-to-child sync (runs only in child repos; guarded so it does not run here).
 - `.github/workflows/notify-property-sites.yml` — dispatches to children (runs only in this repo).
 - `.gitignore`, `.nojekyll`, `.templatesyncignore`.
-- `CLAUDE.md` — canonical editing guidance.
 - `property-sites.json` — registry of property repos to notify.
 
 **Per-property (not synced, ignored by `.templatesyncignore`):**
@@ -49,6 +48,7 @@ Required scopes:
 - `images/` — property photos, floor plans, site plans.
 - `CNAME` — the property's custom domain.
 - The property repo's own `README.md`.
+- `CLAUDE.md` — each property repo carries its own property-specific agent spec; the theme's `CLAUDE.md` is editing guidance for this repo only and is not synced.
 
 ### On partial extraction
 
