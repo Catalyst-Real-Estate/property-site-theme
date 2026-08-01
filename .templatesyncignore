@@ -6,6 +6,7 @@ images/
 images/**
 CNAME
 README.md
+CLAUDE.md
 .templatesyncignore
 property-sites.json
 
