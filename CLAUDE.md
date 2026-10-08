@@ -45,6 +45,7 @@ htmlhint "**/*.html"
 - Single-file `index.html` baseline for now (~1,640 lines in the Lynn Park original). Partial extraction is planned but not done; tracked in [lynn-park-website#1](https://github.com/Catalyst-Real-Estate/lynn-park-website/issues/1).
 - `.nojekyll` is always present so Pages serves HTML as-is.
 - CSS variables live at `:root` — primary colors, typography, spacing. Override these per-property sparingly; prefer theme-level edits so all properties stay visually consistent.
+- Chat is loaded by `assets/chat.js`. Every property page includes it once just before `</body>` (`assets/chat.js` from root pages, `../assets/chat.js` from pages one folder down, matching how `theme.css` is referenced). To change the chat vendor or site key, edit only this file in the theme and merge the resulting sync PRs. Pages must not inline vendor chat snippets.
 
 ## Deployment
 
