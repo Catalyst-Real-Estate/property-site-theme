@@ -42,6 +42,7 @@ Required scopes:
 - `.github/workflows/notify-property-sites.yml` — dispatches to children (runs only in this repo).
 - `.gitignore`, `.nojekyll`, `.templatesyncignore`.
 - `property-sites.json` — registry of property repos to notify.
+- `assets/chat.js` — chat is loaded by `assets/chat.js`. Every property page includes it once just before `</body>` (`assets/chat.js` from root pages, `../assets/chat.js` from pages one folder down, matching how `theme.css` is referenced). To change the chat vendor or site key, edit only this file in the theme and merge the resulting sync PRs. Pages must not inline vendor chat snippets.
 
 **Per-property (not synced, ignored by `.templatesyncignore`):**
 - `index.html` — property-specific content, copy, amenities, floor plans.
