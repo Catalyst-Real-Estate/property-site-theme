@@ -49,4 +49,6 @@ htmlhint "**/*.html"
 
 ## Deployment
 
-This repo does NOT deploy a website. Property repos deploy automatically via GitHub Pages on push to `main`. The `pages.yml` workflow file lives here so template consumers inherit it at creation time, but it is guarded (`if: github.repository != 'Catalyst-Real-Estate/property-site-theme'`) to skip execution on this theme repo.
+This repo does NOT deploy a website. Property repos deploy automatically via GitHub Pages on push to `main`.
+
+`pages.yml` publishes only the site: a "Stage public files" step copies the repo into `_site/` and leaves out Markdown (`*.md`, including `README.md` and `CLAUDE.md`), `docs/`, `capi-worker/`, `scripts/`, `property-sites.json` and repo config dotfiles, so internal notes and tooling never reach the public domain. A property repo that needs to keep more files private lists rsync exclude patterns, one per line, in a `.pagesignore` file at its root. Anything a page links to must not live in an excluded path. The `pages.yml` workflow file lives here so template consumers inherit it at creation time, but it is guarded (`if: github.repository != 'Catalyst-Real-Estate/property-site-theme'`) to skip execution on this theme repo.
